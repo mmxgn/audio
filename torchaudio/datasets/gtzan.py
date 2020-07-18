@@ -1063,10 +1063,12 @@ class GTZAN(Dataset):
                 if not os.path.exists(fulldir):
                     continue
 
-                songs_in_genre = os.listdir(fulldir)
+                # sorted below sorts the files in order to be  accessed
+                # in ascending order, e.g. blues.00001.wav, blues.00002.wav, etc.
+                songs_in_genre = sorted(os.listdir(fulldir))
                 for fname in songs_in_genre:
                     name, ext = os.path.splitext(fname)
-                    if ext.lower() == ".wav" and "." in name:
+                    if ext.lower() == GTZAN._ext_audio and "." in name:
                         # Check whether the file is of the form
                         # `gtzan_genre`.`5 digit number`.wav
                         genre, num = name.split(".")
